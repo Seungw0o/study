@@ -1,5 +1,27 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+
+
+def draw_car_model(center_points, wheel_base, vehicle_length, heading, overall_width, overhang):
+    '''
+    vehicle_length=4.6,
+    heading=30, 
+    overall_width=1.8, 
+    overhang=1.11
+    '''
+    fig, ax = plt.subplots()
+    ax.add_patch(
+    patches.Rectangle(
+    #   (center_points[0]-overhang, center_points[1]-overall_width/2),                   # (x, y)
+      (center_points[0]-vehicle_length/2, center_points[1]-overall_width/2),                   # (x, y)
+      vehicle_length, overall_width,                     # width, height
+      angle=heading,
+      edgecolor = 'black',
+      facecolor = 'lightgray',
+      fill=True,
+      rotation_point='center',
+    ))
 
 def get_interval_1m_path(xy_array):
     '''

@@ -37,12 +37,13 @@ def get_interval_1m_path(xy_array):
 
 def pure_pursuit_guidance(path, lookahead_dist, vehicle_pos, vehicle_length):
     def find_closest_point(path, vehicle_pos):
+        # 차량과 가장 가까운 점 추출
         dist = np.sqrt((path[:, 0] - vehicle_pos[0])**2 + (path[:, 1] - vehicle_pos[1])**2)
         closest_idx = np.argmin(dist)
         return path[closest_idx]
 
     def find_prev_next_points(path, closest_point):
-        closest_idx = np.argwhere((path == closest_point).all(axis=1))[0][0]
+        closest_idx = np.argwhere((path == closest_point).all(axis=1))[0][0] # 경로 중 가장 가까운 점의 idx 추출
         prev_idx = closest_idx - 1
         next_idx = closest_idx + 1
         if prev_idx < 0:
